@@ -1,5 +1,5 @@
 [package]
-name = "enum-code"
+name = "enum-code-proc"
 version = "0.1.1"
 edition = "2021"
 categories = ["rust-patterns"]
@@ -14,8 +14,9 @@ license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-enum-code-proc = { path = "./enum-code-proc"}
+[lib]
+proc-macro = true
 
-[workspace]
-members = ["enum-code-proc"]
+[dependencies]
+quote = "^1"
+syn = "^2"

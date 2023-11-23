@@ -7,7 +7,7 @@
 //! #### 1. Add the `Code` attribute to the `enum` type:
 //!
 //! ```
-//! #[derive(enum_code::Code)]
+//! #[derive(enum_code_proc::Code)]
 //! enum TestError {
 //!     #[code(1)]
 //!     Tuple(String),
@@ -44,8 +44,11 @@
 //! println!("error code: {}", code); // should print 「error code: 1」
 //! ```
 
-pub trait Code {
-    fn get_code(&self) -> i32;
-}
+use crate::code::parse_code_stream;
 
-pub use enum_code_proc::Code;
+mod code;
+
+#[proc_macro_derive(Code, attributes(code))]
+pub fn code(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
+    parse_code_stream(input)
+}
